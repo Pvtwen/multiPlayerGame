@@ -1,5 +1,6 @@
 # 启动
 1. node server.js
+2. server.js是服务端的代码，client.js是用户端的代码.其余的是npm install自定生成的代码.
 # 说明
 1. node 版本 19.0.0
 # 其他
