@@ -1,2 +1,9 @@
-# multiPlayerGame
-A multiplayer's game with Node.js and Websocket
+# 启动
+1. node server.js
+# 说明
+1. node 版本 19.0.0
+# 其他
+1. 关于逻辑判断的有关代码都写在client.js，例如五子棋案例中，判断是否获胜的条件的代码写在了客户端，每一次用户落子，都进行判断。
+2. 如果写在了server端，server端还得保存用户对战情况，特别消耗资源。
+3. 有的功能没有完善，例如服务端检测异常断开连接的代码(刷新浏览器，不是指正常点击离开按钮)
+4. 有关客户端和服务端node的搭建，可以参考该代码，避免了繁琐的版本一致问题。
