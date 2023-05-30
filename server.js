@@ -165,16 +165,17 @@ wss.on('connection', function (ws) {
             block: block,
             action: action,
           }
-          // socket.on无响应
-          server.on('connection',(socket)=>{
-            // socket.on('test',(data)=>{
-            //   console.log(data.test);
-            // })
-            socket.end('被父进程处理');
+          worker_process.on('message',function(data){
+            wss.clients.forEach(function each(client){
+              // console.log(client)
+              if(client.readyState===WebSocket.OPEN){
+                client.send(data);
+              }
+            })
           })
-          server.listen(1337,()=>{
-            worker_process.send('server',server);
-          })
+          // 休眠 直到第二个玩家发送其操作才被唤醒 两者一起发送
+          worker_process.send(JSON.stringify(obj))
+          
           // 第二个玩家创建的操作
         }else if(room[roomNo].actionReady===1){
           room[roomNo].actionReady=2;
@@ -185,14 +186,24 @@ wss.on('connection', function (ws) {
             worker_process.on('close',function(code){
               console.log('子进程退出,退出码为 '+code);
             });
+            // 这里可以把server传过去，但是在support.js中解析中不能server.on('connection')，目前不知道解决办法  2023/5/30
+            const server=net.createServer();
+            worker_process.on('message',function(data){
+              wss.clients.forEach(function each(client){
+                // console.log(client)
+                if(client.readyState===WebSocket.OPEN){
+                  client.send(data);
+                }
+              })
+            })
             var obj={
-              name: userName,
+            name: userName,
               roomNo, roomNo,
               block: block,
               action: action,
-              // ws:ws
             }
-            worker_process.send(JSON.stringify(obj),handle)
+            // 唤醒另一个休眠的线程 一起发送
+            worker_process.send(JSON.stringify(obj))
         }
       }
     });
@@ -205,3 +216,9 @@ wss.on('connection', function (ws) {
       console.log('Error occurred:', err.message);
   });
 });
+async function transmit(worker_process,obj){
+
+}
+function wait(ms) {
+  return new Promise(resolve =>setTimeout(() =>resolve(), ms));
+};
