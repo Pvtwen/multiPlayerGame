@@ -4,6 +4,8 @@ let leftOffset=5;
 let ipt1;
 // 房间号
 let ipt2;
+// 操纵序列号
+let ipt3;
 // 操纵的角色
 let block
 // 建立的websocket全局变量
@@ -37,6 +39,18 @@ function exit(){
     }
     ws.send(JSON.stringify(data))
 }
+
+function send(){
+    ipt3=document.getElementById("ipt3").value;
+    var obj={
+        funcCode: "opt",
+        action: ipt3,
+        userName: ipt1,
+        roomNo: ipt2,
+        block: block
+    }
+    ws.send(JSON.stringify(obj))
+}
 function enter(){
     ipt1=document.getElementById("ipt1").value;
     ipt2=document.getElementById("ipt2").value;
@@ -56,7 +70,7 @@ function enter(){
         console.log(JSON.parse(rec.data).funcCode)
         let recData=JSON.parse(rec.data)
         let funcCode=recData.funcCode
-        console.log(funcCode==="left")
+        console.log(funcCode==="action")
         // console(funcCode==="0")
         if(funcCode==="0"){
             // 分配操纵的角色
@@ -111,6 +125,14 @@ function enter(){
                 car1.style.marginLeft=10+"px"
                  notice2.innerHTML=mess1
                 }
+        }else if(funcCode==="actionChecking"){
+            let roomNo=recData.roomNo;
+            // 如果发来的消息是从原本的房间号 
+            if(roomNo===ipt2){
+                var btn5=document.getElementById("btn5");
+                // 用作提醒
+                btn5.innerHTML="已经发送";
+            }
         }
     }
 }
