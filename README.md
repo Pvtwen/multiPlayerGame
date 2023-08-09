@@ -1,3 +1,9 @@
+# Preface
+1. 毕设，用到了phpstudy软件(已上传),参考[blockly源码](https://github.com/google/blockly-games),微信开发者工具
+2. [blockly源码的启动过程参考](https://www.youtube.com/watch?v=uJ9Jz6CeiyE)
+3. 在微信开发者工具中，本地设置中，勾选不校验合法域名
+4. 若想要在微信开发者工具中可以看见blockly源码的东西,在啊.wxml文件中添加`<web-view src="http://localhost//express/client.html"></web-view>`,src中是启动phpstudy之后的地址
+5. phpstudy根目录中放入blockly源码文件，然后启动服务器，可以获取src
 # 启动
 1. node server.js
 2. server.js是服务端的代码，client.js是用户端的代码.其余的是npm install自定生成的代码.
