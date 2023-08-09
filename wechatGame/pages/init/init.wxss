@@ -1,0 +1,7 @@
+/* pages/init/init.wxss */
+.section{
+  margin-top: 10px;
+}
+.section2{
+  margin-top: 50px;
+}

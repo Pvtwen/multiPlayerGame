@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<scripts src='/node_modules/socket.io/socket.io.js'></scripts>
+<!-- <button bindtap="butt">跳转到游戏界面</button> -->
+<input placeholder="用户名:" bindinput="inputName"  type="nickname" value=""/>
+<input placeholder="房间号:" bindinput="inputRoomId" type="nickname" value=""/>
+<button bindtap="createRoom">创建房间</button>
+<button bindtap="backToMain">返回主页面</button>

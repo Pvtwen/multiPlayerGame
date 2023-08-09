@@ -1,0 +1,3 @@
+<button bindtap="single">单人游戏</button>
+<button bindtap="multi">多人游戏</button>
+<button bindtap="tutorial">示例</button>

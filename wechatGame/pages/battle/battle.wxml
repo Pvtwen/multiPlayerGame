@@ -1,0 +1,4 @@
+<div id="tang1"></div>
+<div id="tang2"></div>
+<button bindtap="clickTang">运动</button>
+<input bindinput="inputName" value="input"/>
